@@ -1,6 +1,9 @@
 import javax.sound.sampled.AudioInputStream;
 
 import fx.Effect;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RunEffects
 {
@@ -45,7 +48,7 @@ class AddNote extends Effect
     public AudioInputStream process(AudioInputStream ais)
 	{
 		// runs the students' code
-            	return AudioManipulation.addNote(ais, 400, 5000);
+            	return AudioManipulation.addNote(ais, 400, 100);
 	}
 }
 
@@ -62,8 +65,14 @@ class Tune extends Effect
 	
     public AudioInputStream process(AudioInputStream ais)
 	{
-		// runs the students' code
-            	return AudioManipulation.tune(ais);
+            AudioInputStream ais2 = null;
+            try {
+                // runs the students' code
+                ais2 = AudioManipulation.tune(ais);
+            } catch (IOException ex) {
+                Logger.getLogger(Tune.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return ais2;
 	}
 }
 
