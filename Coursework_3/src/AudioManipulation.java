@@ -1,7 +1,7 @@
  /**
  * AudioManipulation.java
  *
- * Time-stamp: <2017-02-09 18:35:11 rlc3>
+ * Time-stamp: <2017-02-21 14:20:09 rlc3>
  *
  * Defines mixer/effect functions on audio streams
  * Utilises the AudioInputStream class 
@@ -67,7 +67,7 @@ public class AudioManipulation {
 		int LB = (int) a[2*i+1];
 		// note that data[i] =def sign_extend(HB.LB) 
 		// | : Bool^32 x Bool^32 -----> Bool^32 where Bool = {0, 1} 
-		data[i] =  HB << 8 | (LB & 0xff); //HB means 'Higher Byte' LB means 'Lower Byte'
+		data[i] =  HB << 8 | (LB & 0xff); 
  	    }
 
 	    // split samples into two channels
@@ -129,13 +129,11 @@ public class AudioManipulation {
 
 /**** scaleToZero *****************************************************************/
 
-    public static AudioInputStream scaleToZero(AudioInputStream ais) {
+   public static AudioInputStream scaleToZero(AudioInputStream ais) {
 
 	byte[] a = null;
 	int[] data, ch0, ch1;
 	int max;
-
-
 
 	try{
 	
@@ -217,15 +215,13 @@ public class AudioManipulation {
 
 /**** addNote *****************************************************************/
 
-    public static AudioInputStream addNote(AudioInputStream ais,
+   public static AudioInputStream addNote(AudioInputStream ais,
                                            double frequency,
 					   int noteLengthInMilliseconds) {
 	byte[] a = null;
 	int[] data;
 	int frameSize 	= ais.getFormat().getFrameSize(); 
 	int numChannels = ais.getFormat().getChannels(); 
-
-
 
       try { 
   
@@ -309,7 +305,7 @@ public class AudioManipulation {
 
 /**** tune  *****************************************************************/
 
-	public static AudioInputStream tune(AudioInputStream ais) throws IOException{
+	public static AudioInputStream tune(AudioInputStream ais){
 
      		AudioInputStream temp = null;
 
@@ -322,9 +318,6 @@ public class AudioManipulation {
 		// Hint: Each octave results in a doubling of frequency.
 
 		double C4	= 261.63;
-		double D4	= 293.66; 	
-		double Eb4  	= 311.13;
-		double E4	= 329.63; 
                 double E5       = 659.26;
                 double E6       = E5 * 2;
 		double F4	= 349.23; 
@@ -333,10 +326,8 @@ public class AudioManipulation {
 		double G4	= 392.00; 
                 double G5       = G4 * 2;
                 double G6       = G5 * 2;
-		double A4	= 440.00; 
                 double A5       = 880.00;
                 double A6       = A5 * 2;
-		double B4	= 493.88; 
                 double B5       = 987.76;
                 double B6       = B5 * 2;
 		double C5	= 523.25; 
@@ -372,8 +363,6 @@ public class AudioManipulation {
 		//use addNote to build the tune as an AudioInputStream
 		// starting from the empty AudioInputStream temp (above) and adding each note one by one USE A LOOP !!!! 
                
-                
-         
 		for (int i=0; i<notes.length; i++){
                     temp = addNote(temp, notes[notes.length-1-i][0], (int) notes[notes.length-1-i][1]);
                     if (i==15 || i==20){
@@ -383,8 +372,7 @@ public class AudioManipulation {
                         temp = addNote(temp, 0, 100); 
                     }
                 }
-             
-
+               
 		// append temp, ie the tune, to current ais 
        		return append(temp,ais);
     }
@@ -399,14 +387,12 @@ public class AudioManipulation {
 	int frameInterval = (int) (frameRate * timeInterval);
 	int inputLengthInBytes = (int) (frameSize * ais.getFrameLength());
 	int numChannels     = ais.getFormat().getChannels(); // = 2
-        
+               
 	// byte arrays for input channels and output channels
 	byte[] ich0, ich1, och0, och1;
 	byte[] a=null, b=null;
 
 	try {
-
-
 		     // create new byte arrays a for input and b for output of the right size
 		     a = new byte[inputLengthInBytes];
                      b = new byte[2 * inputLengthInBytes];
@@ -424,39 +410,48 @@ public class AudioManipulation {
                             ich1[i] = a[2*i+1];
                      } 
 		     // compute the output channels from the input channels - this is the hard part.
-                     int N = frameInterval*frameSize;
-                                       
-                     for (int i=N;i<och0.length; i+=2*N){
-                         for (int j=0; j<N-1; j++){
-                             och0[i] = ich0[j];
-                             och1[i-N] = ich1[j];
-                             i++;
-                         }
-                     }
-                     int outL = b.length/2;
-                     int rem = outL %(2*N);
-  
-                     for(int k=0;k<rem/2;k++){
-                         och0[outL-rem/2] = ich0[ich0.length-N+k];
-                         och1[outL-rem] = ich1[ich1.length-N+k];
-                     }
-                                
+                       
 	  //use an index i to mark out start positions of double segments A0, B0, C0 etc of length 2*N
 	  //use index j to count the individual bytes in segments, going from 0 to N-1
 	  //use index k to count the individual bytes in the final segment, whose length in bytes must be rem/2 = ??
-	          //where rem is the remainder of outL when dividing outL by whole double segments of 2*N bytes	  
-	  
-		     // MAIN CODE HERE 
+	          //where rem is the remainder of outL when dividing outL by whole double segments of 2*N bytes	
+                  int N = frameInterval*frameSize;
+                   int m=0;
+                       for (int i=N;i<och0.length; i+=2*N){
+                                  for (int j=0; j<N-1; j++){
+                                      och0[i] = ich0[m];
+                                      i++;
+                                      m++;
+                                  }
+                              }
+                           
+                   int l=0;           
+                       for (int i=0;i<och1.length; i+=2*N){
+                                  for (int j=0; j<N-1; j++){
+                                      och1[i] = ich0[l];
+                                      i++;
+                                      l++;
+                                  }
+                              }
+                       
+		     int outL = och0.length;
+                              int rem = outL %(2*N);
+                     
+                     int w=0;
+                             for(int k=och0.length-rem/2;k<och0.length;k++){
+                                  och0[k] = ich0[ich0.length-rem/2+w];
+                                  och1[k-rem] = ich1[ich1.length-rem/2+w];
+                                  w++;
+                              }
 
 		     // join och0 and och1 into b
 	              for (int i=0; i < b.length; i += 4) {
 		      	  b[i]   = och0[i/2];
-                          b[i+1] = och1[i/2];
-                          b[i+2] = och0[(i/2)+1];
-                          b[i+3] = och1[(i/2)+1];
+                          b[i+1] = och0[i/2+1];
+                          b[i+2] = och1[i/2];
+                          b[i+3] = och1[i/2+1];
 			  // etc etc 
 		      }
-
 
 
 	} catch(Exception e){
