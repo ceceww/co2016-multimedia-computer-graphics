@@ -78,10 +78,10 @@ public class SolarSystem extends JFrame{
          rotatorMercury.setSchedulingBounds(bounds);
         
          // creating another transform group (new mercuryTG1, from mer
-        // first creating a transformation mer which gives mercury initial position of -2.5 along z-axis from sun
+        // first creating a transformation mer which gives mercury initial position of -1 along z-axis from sun
 	Transform3D mercury3d = new Transform3D();
         mercury3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
-        mercury3d.setTranslation(new Vector3d(0.0, 0.0 ,-2.5));
+        mercury3d.setTranslation(new Vector3d(0.0, 0.0 ,-1.0));
 	Transform3D helperT3D= new Transform3D();
 	//helperT3D.rotZ(Math.PI);
 	//t.mul(helperT3D);
@@ -126,7 +126,7 @@ public class SolarSystem extends JFrame{
         int primflags = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
       
 	//creation of mercury
-	Sphere mercury = new Sphere(0.1f,primflags,apmer);
+	Sphere mercury = new Sphere(0.05f,primflags,apmer);
         
         //VENUS
         //creating a rotation interpolator for venus so venus will orbit around the sun
@@ -141,10 +141,10 @@ public class SolarSystem extends JFrame{
          rotatorVenus.setSchedulingBounds(bounds);
         
         // creating another transform group (new venusTG1, from ven)
-        // first creating a transformation ven which gives venus initial position of -5 along z-axis from sun
+        // first creating a transformation ven which gives venus initial position of -2 along z-axis from sun
 	Transform3D venus3d = new Transform3D();
         venus3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
-        venus3d.setTranslation(new Vector3d(0.0, 0.0 ,-5));
+        venus3d.setTranslation(new Vector3d(0.0, 0.0 ,-2));
 	TransformGroup venusTG1 = new TransformGroup(venus3d);
         
         // creating a rotation interpolator for a new venusTG2
@@ -179,7 +179,7 @@ public class SolarSystem extends JFrame{
         apven.setMaterial(planetmaterial);
          
         //creation of venus
-        Sphere venus = new Sphere (0.2f,primflags,apven);
+        Sphere venus = new Sphere (0.1f,primflags,apven);
         
         
         
@@ -196,10 +196,10 @@ public class SolarSystem extends JFrame{
          rotatorEarth.setSchedulingBounds(bounds);
         
         // creating another transform group (new earthTG1, from ear)
-        // first creating a transformation ear which gives earth initial position of -7.5 along z-axis from sun
+        // first creating a transformation ear which gives earth initial position of -3 along z-axis from sun
 	Transform3D earth3d = new Transform3D();
         earth3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
-        earth3d.setTranslation(new Vector3d(0.0, 0.0 ,-7.5));
+        earth3d.setTranslation(new Vector3d(0.0, 0.0 ,-3));
 	TransformGroup earthTG1 = new TransformGroup(earth3d);
         
         // creating a rotation interpolator for a new earthTG2
@@ -234,7 +234,7 @@ public class SolarSystem extends JFrame{
         apear.setMaterial(planetmaterial);
       
         //creation of earth
-        Sphere earth = new Sphere (0.3f,primflags,apear);
+        Sphere earth = new Sphere (0.15f,primflags,apear);
         
         //MARS
         //creating a rotation interpolator for mars so mars will orbit around the sun
@@ -249,10 +249,10 @@ public class SolarSystem extends JFrame{
          rotatorMars.setSchedulingBounds(bounds);
         
         // creating another transform group (new marsTG1, from mars3d)
-        // first creating a transformation mars3d which gives mars initial position of -10 along z-axis from sun
+        // first creating a transformation mars3d which gives mars initial position of -4 along z-axis from sun
 	Transform3D mars3d = new Transform3D();
         mars3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
-        mars3d.setTranslation(new Vector3d(0.0, 0.0 ,-10));
+        mars3d.setTranslation(new Vector3d(0.0, 0.0 ,-4));
 	TransformGroup marsTG1 = new TransformGroup(mars3d);
         
         // creating a rotation interpolator for a new marsTG2
@@ -286,7 +286,7 @@ public class SolarSystem extends JFrame{
         apmar.setTextureAttributes(texattmar);
         apmar.setMaterial(planetmaterial);
         //creation of mars
-        Sphere mars = new Sphere (0.15f,primflags,apmar);
+        Sphere mars = new Sphere (0.075f,primflags,apmar);
         
         //JUPITER
         //creating a rotation interpolator for jupiter so jupiter will orbit around the sun
@@ -301,10 +301,10 @@ public class SolarSystem extends JFrame{
          rotatorJupiter.setSchedulingBounds(bounds);
         
         // creating another transform group (new jupiterTG1, from jupiter3d)
-        // first creating a transformation jupiter3d which gives jupiter initial position of -12.5 along z-axis from sun
+        // first creating a transformation jupiter3d which gives jupiter initial position of -5 along z-axis from sun
 	Transform3D jupiter3d = new Transform3D();
         jupiter3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
-        jupiter3d.setTranslation(new Vector3d(0.0, 0.0 ,-12.5));
+        jupiter3d.setTranslation(new Vector3d(0.0, 0.0 ,-5));
 	TransformGroup jupiterTG1 = new TransformGroup(jupiter3d);
         
         // creating a rotation interpolator for a new jupiterTG2
@@ -338,7 +338,7 @@ public class SolarSystem extends JFrame{
         apjup.setTextureAttributes(texattjup);
         apjup.setMaterial(planetmaterial);
         //creation of jupiter
-        Sphere jupiter = new Sphere (0.5f,primflags,apjup);
+        Sphere jupiter = new Sphere (0.25f,primflags,apjup);
         
         //Saturn
         //creating a rotation interpolator for saturn its rings so they will orbit around the sun
@@ -353,10 +353,10 @@ public class SolarSystem extends JFrame{
          rotatorSaturn.setSchedulingBounds(bounds);
         
         // creating another transform group (new saturnTG1, from saturn3d)
-        // first creating a transformation saturn3d which gives saturn and rings initial position of -15 along z-axis from sun
+        // first creating a transformation saturn3d which gives saturn and rings initial position of -7 along z-axis from sun
 	Transform3D saturn3d = new Transform3D();
         saturn3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
-        saturn3d.setTranslation(new Vector3d(0.0, 0.0 ,-15));
+        saturn3d.setTranslation(new Vector3d(0.0, 0.0 ,-7));
 	TransformGroup saturnTG1 = new TransformGroup(saturn3d);
         
         // creating a rotation interpolator for a new saturnTG2
@@ -391,7 +391,7 @@ public class SolarSystem extends JFrame{
         apsat.setMaterial(planetmaterial);
       
         //creation of saturn
-        Sphere saturn = new Sphere (0.5f,primflags,apsat);
+        Sphere saturn = new Sphere (0.2f,primflags,apsat);
         
         //SATURN'S RINGS
         // creating an appearance for rings
@@ -404,7 +404,7 @@ public class SolarSystem extends JFrame{
         ringsApp.setTransparencyAttributes(ringsTA);
 	
         // create rings
-	Cylinder rings = new Cylinder(0.7f, 0.05f,ringsApp);
+	Cylinder rings = new Cylinder(0.25f, 0.05f,ringsApp);
         
         
         //SUN
@@ -448,7 +448,7 @@ public class SolarSystem extends JFrame{
         apsun.setTextureAttributes(texAttSun);
     
         //creation of sun
-        Sphere sun = new Sphere(1.0f, primflags, apsun);
+        Sphere sun = new Sphere(0.5f, primflags, apsun);
         
         // Create light from sun
         // PointLight is used to radiate light from the origin (where sun is)
@@ -554,7 +554,7 @@ public class SolarSystem extends JFrame{
 	Vector3f translate = new Vector3f(); 
       	Transform3D T3D = new Transform3D();
 	// move along z axis by 10.0f ("move away from the screen") 
-	translate.set( 0.0f, 0.0f, 25.0f);
+	translate.set( 0.0f, 0.0f, 10.0f);
         T3D.setTranslation(translate);
 	cameraTG.setTransform(T3D);
         setTitle("Solar System");
