@@ -12,15 +12,12 @@ import java.awt.Container;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.Bounds;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.ColoringAttributes;
-import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.Material;
 import javax.media.j3d.PointLight;
 import javax.media.j3d.RotationInterpolator;
-import javax.media.j3d.SpotLight;
 import javax.media.j3d.Texture;
 import javax.media.j3d.TextureAttributes;
 import javax.media.j3d.Transform3D;
@@ -30,7 +27,6 @@ import javax.swing.JFrame;
 import javax.vecmath.Color3f;
 import javax.vecmath.Color4f;
 import javax.vecmath.Point3d;
-import javax.vecmath.Point3f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
@@ -70,7 +66,7 @@ public class SolarSystem extends JFrame{
         // 2750 is the time for the rotation 
 	// -1 sets up infinite loop
         //it takes mercury 88 days to orbit around the sun
-        Alpha rotationAlphaMercury = new Alpha(-1, 3750);
+        Alpha rotationAlphaMercury = new Alpha(-1, 2415);
          //rotate 360 degrees (full orbit) around the sun by setting ending angle to 2*pi radians
         Transform3D yAxis = new Transform3D(); //this is also used for the other planets
          RotationInterpolator rotatorMercury = new RotationInterpolator(rotationAlphaMercury,
@@ -94,7 +90,8 @@ public class SolarSystem extends JFrame{
         // this behaviour object causes mercury to rotate around the locale y axis
 	// -1 means indefinite loop count 
         //one rotation of mercury takes 59 earth days
-        Alpha rotationAlphaMercury2 = new Alpha(-1, 3000);
+        //rotation of mercury is in proportion to its orbit
+        Alpha rotationAlphaMercury2 = new Alpha(-1, 1616);
         Transform3D yAxis2 = new Transform3D();
         // RotationInterpolator always rotates around y axis by default 
 	// *** see scene graph example 1 for a change to the z axis  *** 
@@ -134,7 +131,7 @@ public class SolarSystem extends JFrame{
         venusTG0.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
        
         //it takes venus 225 days to orbit around the sun
-        Alpha rotationAlphaVenus = new Alpha(-1, 9375);
+        Alpha rotationAlphaVenus = new Alpha(-1, 6173);
          
         RotationInterpolator rotatorVenus = new RotationInterpolator(rotationAlphaVenus,
          venusTG0, yAxis, 0.0f, (float) Math.PI * (2.0f));
@@ -152,7 +149,9 @@ public class SolarSystem extends JFrame{
 	venusTG2.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         // this behaviour object causes venus to rotate around the locale y axis
 	// -1 means indefinite loop count 
-        Alpha rotationAlphaVenus2 = new Alpha(-1, 12000);
+        //one rotation of venus takes 243 earth days
+        //rotation speed is in proportion to venus orbit around the sun
+        Alpha rotationAlphaVenus2 = new Alpha(-1, 6658);
         // RotationInterpolator always rotates around y axis by default 
 	// *** see scene graph example 1 for a change to the z axis  *** 
         // *** but try this out yAxis2.rotZ(Math.PI/2); *** 
@@ -181,15 +180,13 @@ public class SolarSystem extends JFrame{
         //creation of venus
         Sphere venus = new Sphere (0.1f,primflags,apven);
         
-        
-        
         //EARTH
         //creating a rotation interpolator for earth so earth will orbit around the sun
         TransformGroup earthTG0 = new TransformGroup();
         earthTG0.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
        
         //it takes Earth 365 days to orbit the sun
-        Alpha rotationAlphaEarth = new Alpha(-1, 15000);
+        Alpha rotationAlphaEarth = new Alpha(-1, 10000);
          
         RotationInterpolator rotatorEarth = new RotationInterpolator(rotationAlphaEarth,
          earthTG0, yAxis, 0.0f, (float) Math.PI * (2.0f));
@@ -207,7 +204,10 @@ public class SolarSystem extends JFrame{
 	earthTG2.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         // this behaviour object causes earth to rotate around the locale y axis
 	// -1 means indefinite loop count 
-        Alpha rotationAlphaEarth2 = new Alpha(-1, 8000);
+        //earth rotates 365 time in a year
+        //earth's rotation is NOT in proportion to it's orbit around the sun
+        //because rotation would be too fast and won't look good
+        Alpha rotationAlphaEarth2 = new Alpha(-1, 1000);
         // RotationInterpolator always rotates around y axis by default 
 	// *** see scene graph example 1 for a change to the z axis  *** 
         // *** but try this out yAxis2.rotZ(Math.PI/2); *** 
@@ -242,7 +242,7 @@ public class SolarSystem extends JFrame{
         marsTG0.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
        
         //it takes mars 687 days to orbit the sun
-        Alpha rotationAlphaMars = new Alpha(-1, 30000);
+        Alpha rotationAlphaMars = new Alpha(-1, 18822);
          
         RotationInterpolator rotatorMars = new RotationInterpolator(rotationAlphaMars,
          marsTG0, yAxis, 0.0f, (float) Math.PI * (2.0f));
@@ -259,8 +259,10 @@ public class SolarSystem extends JFrame{
 	TransformGroup marsTG2 = new TransformGroup();
 	marsTG2.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         // this behaviour object causes mars to rotate around the locale y axis
-	// -1 means indefinite loop count 
-        Alpha rotationAlphaMars2 = new Alpha(-1, 8000);
+	// -1 means indefinite loop count
+        //it takes mars approx. 24 hrs to rotate once on its axis
+        //mars's rotation is NOT in proportion to it's orbit around the sun
+        Alpha rotationAlphaMars2 = new Alpha(-1, 1000);
         // RotationInterpolator always rotates around y axis by default 
 	// *** see scene graph example 1 for a change to the z axis  *** 
         // *** but try this out yAxis2.rotZ(Math.PI/2); *** 
@@ -294,7 +296,7 @@ public class SolarSystem extends JFrame{
         jupiterTG0.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
        
         //it takes jupiter 12yrs to orbit the sun
-        Alpha rotationAlphaJupiter = new Alpha(-1, 180000);
+        Alpha rotationAlphaJupiter = new Alpha(-1, 120000);
          
         RotationInterpolator rotatorJupiter = new RotationInterpolator(rotationAlphaJupiter,
          jupiterTG0, yAxis, 0.0f, (float) Math.PI * (2.0f));
@@ -312,7 +314,9 @@ public class SolarSystem extends JFrame{
 	jupiterTG2.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         // this behaviour object causes jupiter to rotate around the locale y axis
 	// -1 means indefinite loop count 
-        Alpha rotationAlphaJupiter2 = new Alpha(-1, 2000);
+        //it takes jupiter approx. 9hrs to rotate once on its axis
+        //jupiter's rotation is NOT in proportion to it's orbit around the sun
+        Alpha rotationAlphaJupiter2 = new Alpha(-1, 500);
         // RotationInterpolator always rotates around y axis by default 
 	// *** see scene graph example 1 for a change to the z axis  *** 
         // *** but try this out yAxis2.rotZ(Math.PI/2); *** 
@@ -346,7 +350,7 @@ public class SolarSystem extends JFrame{
         saturnTG0.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
        
         //it takes Saturn 29yrs to orbit the sun
-        Alpha rotationAlphaSaturn = new Alpha(-1, 435000);
+        Alpha rotationAlphaSaturn = new Alpha(-1, 290000);
          
         RotationInterpolator rotatorSaturn = new RotationInterpolator(rotationAlphaSaturn,
          saturnTG0, yAxis, 0.0f, (float) Math.PI * (2.0f));
@@ -364,7 +368,9 @@ public class SolarSystem extends JFrame{
 	saturnTG2.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         // this behaviour object causes saturn to rotate around the locale y axis
 	// -1 means indefinite loop count 
-        Alpha rotationAlphaSaturn2 = new Alpha(-1, 4000);
+        //it takes saturn approx. 10 hours to rotate once on it's axis
+        //saturn's rotation is NOT in proportion to it's orbit around the sun
+        Alpha rotationAlphaSaturn2 = new Alpha(-1, 600);
         // RotationInterpolator always rotates around y axis by default 
 	// *** see scene graph example 1 for a change to the z axis  *** 
         // *** but try this out yAxis2.rotZ(Math.PI/2); *** 
@@ -404,7 +410,118 @@ public class SolarSystem extends JFrame{
         ringsApp.setTransparencyAttributes(ringsTA);
 	
         // create rings
-	Cylinder rings = new Cylinder(0.25f, 0.05f,ringsApp);
+	Cylinder rings = new Cylinder(0.25f, 0.01f,ringsApp);
+        
+        //URANUS
+        //creating a rotation interpolator for uranus so uranus will orbit around the sun
+        TransformGroup uranusTG0 = new TransformGroup();
+        uranusTG0.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+       
+        //it takes uranus 84 years to orbit the sun
+        Alpha rotationAlphaUranus = new Alpha(-1, 840000);
+         
+        RotationInterpolator rotatorUranus = new RotationInterpolator(rotationAlphaUranus,
+         uranusTG0, yAxis, 0.0f, (float) Math.PI * (2.0f));
+         rotatorUranus.setSchedulingBounds(bounds);
+        
+        // creating another transform group (new uranusTG1, from uranus3d)
+        // first creating a transformation uranus3d which gives uranus initial position of -9 along z-axis from sun
+	Transform3D uranus3d = new Transform3D();
+        uranus3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
+        uranus3d.setTranslation(new Vector3d(0.0, 0.0 ,-9));
+	TransformGroup uranusTG1 = new TransformGroup(uranus3d);
+        
+        // creating a rotation interpolator for a new uranusTG2
+	TransformGroup uranusTG2 = new TransformGroup();
+	uranusTG2.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        // this behaviour object causes uranus to rotate around the locale y axis
+	// -1 means indefinite loop count 
+        //it takes approx. 17hrs for uranus to rotate once on its axis
+        //uranus's rotation is NOT in proportion to it's orbit around the sun
+        Alpha rotationAlphaUranus2 = new Alpha(-1, 800);
+        // RotationInterpolator always rotates around y axis by default 
+	// *** see scene graph example 1 for a change to the z axis  *** 
+        // *** but try this out yAxis2.rotZ(Math.PI/2); *** 
+        //set max angle to negative because uranus has retrograde rotation, like venus
+        RotationInterpolator rotatorUranus2 = new RotationInterpolator(rotationAlphaUranus2,
+        uranusTG2, yAxis2, 0.0f, -(float) Math.PI * (2.0f));
+         rotatorUranus2.setSchedulingBounds(bounds);
+         
+         // Set up the texture map for uranus 
+  
+        TextureLoader loaderura = new TextureLoader("uranustexture.jpeg", "RGB", new Container());
+        Texture textureura = loaderura.getTexture();
+        textureura.setBoundaryModeS(Texture.WRAP);
+        textureura.setBoundaryModeT(Texture.WRAP);
+        textureura.setBoundaryColor( new Color4f( 0.0f, 1.0f, 0.0f, 0.0f ) );    
+        
+        // Set up the texture attributes
+        //could be REPLACE, BLEND or DECAL instead of MODULATE
+        TextureAttributes texattura = new TextureAttributes();
+        texattura.setTextureMode(TextureAttributes.MODULATE);
+        
+        Appearance apura = new Appearance();
+        apura.setTexture(textureura);
+        apura.setTextureAttributes(texattura);
+        apura.setMaterial(planetmaterial);
+      
+        //creation of uranus
+        Sphere uranus = new Sphere (0.175f,primflags,apura);
+        
+        //Neptune
+        //creating a rotation interpolator for neptune so neptune will orbit around the sun
+        TransformGroup neptuneTG0 = new TransformGroup();
+        neptuneTG0.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+       
+        //it takes Neptune 165 years to orbit the sun
+        Alpha rotationAlphaNeptune = new Alpha(-1, 1650000);
+         
+        RotationInterpolator rotatorNeptune = new RotationInterpolator(rotationAlphaNeptune,
+         neptuneTG0, yAxis, 0.0f, (float) Math.PI * (2.0f));
+         rotatorNeptune.setSchedulingBounds(bounds);
+        
+        // creating another transform group (new neptuneTG1, from neptune3d)
+        // first creating a transformation neptune3d which gives neptune initial position of -10 along z-axis from sun
+	Transform3D neptune3d = new Transform3D();
+        neptune3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
+        neptune3d.setTranslation(new Vector3d(0.0, 0.0 ,-10));
+	TransformGroup neptuneTG1 = new TransformGroup(neptune3d);
+        
+        // creating a rotation interpolator for a new neptuneTG2
+	TransformGroup neptuneTG2 = new TransformGroup();
+	neptuneTG2.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        // this behaviour object causes neptune to rotate around the locale y axis
+	// -1 means indefinite loop count 
+        //it takes neptune approx. 19hrs to rotate once on its axis
+        //rotation of neptune is NOT in proportion to its orbit around the sun
+        Alpha rotationAlphaNeptune2 = new Alpha(-1, 900);
+        // RotationInterpolator always rotates around y axis by default 
+	// *** see scene graph example 1 for a change to the z axis  *** 
+        // *** but try this out yAxis2.rotZ(Math.PI/2); *** 
+        RotationInterpolator rotatorNeptune2 = new RotationInterpolator(rotationAlphaNeptune2,
+        neptuneTG2, yAxis2, 0.0f, (float) Math.PI * (2.0f));
+         rotatorNeptune2.setSchedulingBounds(bounds);
+         
+         // Set up the texture map for neptune 
+  
+        TextureLoader loadernep = new TextureLoader("neptunetexture.jpeg", "RGB", new Container());
+        Texture texturenep = loadernep.getTexture();
+        texturenep.setBoundaryModeS(Texture.WRAP);
+        texturenep.setBoundaryModeT(Texture.WRAP);
+        texturenep.setBoundaryColor( new Color4f( 0.0f, 1.0f, 0.0f, 0.0f ) );    
+        
+        // Set up the texture attributes
+        //could be REPLACE, BLEND or DECAL instead of MODULATE
+        TextureAttributes texattnep = new TextureAttributes();
+        texattnep.setTextureMode(TextureAttributes.MODULATE);
+        
+        Appearance apnep = new Appearance();
+        apnep.setTexture(texturenep);
+        apnep.setTextureAttributes(texattnep);
+        apnep.setMaterial(planetmaterial);
+      
+        //creation of neptune
+        Sphere neptune = new Sphere (0.175f,primflags,apnep);
         
         
         //SUN
@@ -456,7 +573,7 @@ public class SolarSystem extends JFrame{
         sunlight.setCapability(PointLight.ALLOW_POSITION_WRITE);
         sunlight.setCapability(PointLight.ALLOW_ATTENUATION_WRITE);
         sunlight.setPosition(0.0f,0.0f,0.0f);
-        sunlight.setAttenuation(0.3f,0.0f,0.0f); //how much it lights up the planets
+        sunlight.setAttenuation(0.5f,0.0f,0.0f); //how much it lights up the planets
         sunlight.setInfluencingBounds(bounds);
 
         
@@ -470,6 +587,8 @@ public class SolarSystem extends JFrame{
         mainTG.addChild(marsTG0);
         mainTG.addChild(jupiterTG0);
         mainTG.addChild(saturnTG0);
+        mainTG.addChild(uranusTG0);
+        mainTG.addChild(neptuneTG0);
         mainTG.addChild(sunTG1);
         //MERCURY
 	mercuryTG0.addChild(mercuryTG1);
@@ -508,6 +627,18 @@ public class SolarSystem extends JFrame{
         saturnTG2.addChild(saturn);
         saturnTG0.addChild(rotatorSaturn);
         saturnTG2.addChild(rotatorSaturn2);
+        //URANUS
+        uranusTG0.addChild(uranusTG1);
+        uranusTG1.addChild(uranusTG2);
+        uranusTG2.addChild(uranus);
+        uranusTG0.addChild(rotatorUranus);
+        uranusTG2.addChild(rotatorUranus2);
+        //NEPTUNE
+        neptuneTG0.addChild(neptuneTG1);
+        neptuneTG1.addChild(neptuneTG2);
+        neptuneTG2.addChild(neptune);
+        neptuneTG0.addChild(rotatorNeptune);
+        neptuneTG2.addChild(rotatorNeptune2);
         //SUN
         sunTG1.addChild(sunTG2);
         sunTG2.addChild(sun);
