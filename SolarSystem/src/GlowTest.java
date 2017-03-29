@@ -28,6 +28,7 @@ import javax.swing.JFrame;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
+import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
 /**
@@ -51,41 +52,44 @@ public class GlowTest extends JFrame{
 	mainTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 	mainTG.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         
-        Sphere sun = new Sphere(1.0f);
+        Transform3D star3d = new Transform3D();
+        star3d.setScale(new Vector3d(2.0, 2.0 ,2.0));
+        star3d.setTranslation(new Vector3d(0.0, 0.0 ,-20));
+	TransformGroup starTG = new TransformGroup(star3d);
+        
+        Sphere star = new Sphere(0.05f);
+        
         Color3f white = new Color3f(1.0f, 1.0f, 1.0f);
         Color3f black = new Color3f (0.0f,0.0f,0.0f);
-        
         
          Vector3f light1Direction = new Vector3f(4.0f, -7.0f, -12.0f);
 
          DirectionalLight light1 = new DirectionalLight(white, light1Direction);
          light1.setInfluencingBounds(bounds);
-
-         objRoot.addChild(light1);
-        
+      
         Material material = new Material();
         material.setDiffuseColor(black);
         material.setSpecularColor(white);
         material.setShininess(7.0f);
-        Appearance ap = new Appearance();
-        ap.setMaterial(material);
+        Appearance apstar = new Appearance();
+        apstar.setMaterial(material);
       
-        sun.setAppearance(ap);
+        star.setAppearance(apstar);
         
-        SpotLight spotlight = new SpotLight();
+      /*  SpotLight spotlight = new SpotLight();
         spotlight.setInfluencingBounds(bounds);
         spotlight.setPosition(new Point3f(0.0f, -0.7f, 0.5f));
         spotlight.setSpreadAngle(0.5f);
         spotlight.setConcentration(50.0f);
         
-        objRoot.addChild(spotlight);
-        // MAKING RELATIONS BETWEEN THE SCENE GRAPH NODES
-	// mercury is transformed by mercuryTG2 then mercuryTG1
-        // sun is at the origin 
-        //SUN
+        objRoot.addChild(spotlight);*/
+      
         objRoot.addChild(mainTG);
-	mainTG.addChild(sun);
-	
+        mainTG.addChild(starTG);
+        starTG.addChild(star);
+        mainTG.addChild(light1);
+        
+   
 	// Create the rotate behavior node
 	MouseRotate behavior = new MouseRotate();
 	behavior.setTransformGroup(mainTG);
@@ -129,7 +133,7 @@ public class GlowTest extends JFrame{
 	Vector3f translate = new Vector3f(); 
       	Transform3D T3D = new Transform3D();
 	// move along z axis by 10.0f ("move away from the screen") 
-	translate.set( 0.0f, 0.0f, 15.0f);
+	translate.set( 0.0f, 0.0f, 10.0f);
         T3D.setTranslation(translate);
 	cameraTG.setTransform(T3D);
         setTitle("Solar System");
