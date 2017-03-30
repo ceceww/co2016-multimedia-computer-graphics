@@ -3,6 +3,7 @@ import com.sun.j3d.utils.geometry.Box;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.Material;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
@@ -16,11 +17,17 @@ public class Bridge {
     public static BranchGroup bridge(){
         BranchGroup bg = new BranchGroup();
         
+        Material woodMaterial = new Material(); 
+        woodMaterial.setAmbientColor(new Color3f(0.52f,0.37f,0.26f));
+        woodMaterial.setSpecularColor(new Color3f(0.1f,0.1f,0.1f)); 
+        woodMaterial.setDiffuseColor(new Color3f(0.1f,0.1f,0.1f));
+        
         Appearance bridgeApp = new Appearance();
         ColoringAttributes bridgeCA = new ColoringAttributes();
         Color3f brown = new Color3f(0.52f,0.37f,0.26f);
         bridgeCA.setColor(brown);
         bridgeApp.setColoringAttributes(bridgeCA);
+        bridgeApp.setMaterial(woodMaterial);
         
         Transform3D sup1pos = new Transform3D();
         sup1pos.setTranslation(new Vector3d(0.0,0.22,0.0));

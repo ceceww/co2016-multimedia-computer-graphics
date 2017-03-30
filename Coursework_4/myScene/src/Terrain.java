@@ -18,13 +18,13 @@ public class Terrain {
         //grass appearance
         Appearance surfaceApp = new Appearance();
         ColoringAttributes surfaceCA = new ColoringAttributes();
-        Color3f green = new Color3f(0.30f,0.74f,0.20f);
+        Color3f green = new Color3f(0.30f,0.75f,0.20f);
         surfaceCA.setColor(green);
         surfaceApp.setColoringAttributes(surfaceCA);
         
         //transformation to position dirt under grass
         Transform3D dirt3d = new Transform3D();
-        dirt3d.setTranslation(new Vector3f(0.0f,-0.15f,0.0f));
+        dirt3d.setTranslation(new Vector3f(0.0f,-0.25f,0.0f));
         TransformGroup dirtTG = new TransformGroup(dirt3d);
         
         //dirt appearance
@@ -34,8 +34,8 @@ public class Terrain {
         dirtCA.setColor(brown);
         dirtApp.setColoringAttributes(dirtCA);
         
-        Box surface = new Box(1.5f,0.05f,1.5f,surfaceApp);
-        Box dirt = new Box(1.5f,0.1f,1.5f,dirtApp);
+        Box surface = new Box(2.5f,0.05f,2.5f,surfaceApp);
+        Box dirt = new Box(2.5f,0.20f,2.5f,dirtApp);
         
         bg.addChild(surface);
         bg.addChild(dirtTG);

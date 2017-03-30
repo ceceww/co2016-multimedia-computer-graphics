@@ -1,9 +1,11 @@
 import com.sun.j3d.utils.geometry.Box;
 import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.geometry.Cylinder;
+import java.awt.Color;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.Material;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
@@ -18,6 +20,21 @@ public class Train {
         
         BranchGroup bg = new BranchGroup();
         
+        Material redMaterial = new Material(); 
+        redMaterial.setAmbientColor(new Color3f(1.0f,0.0f,0.0f));
+        redMaterial.setSpecularColor(new Color3f(0.5f,0.5f,0.5f)); 
+        redMaterial.setDiffuseColor(new Color3f(0.3f,0.3f,0.3f));
+        
+        Material blueMaterial = new Material(); 
+        blueMaterial.setAmbientColor(new Color3f(0.0f,0.0f,1.0f));
+        blueMaterial.setSpecularColor(new Color3f(0.5f,0.5f,0.5f)); 
+        blueMaterial.setDiffuseColor(new Color3f(0.3f,0.3f,0.3f));
+        
+        Material darkMaterial = new Material(); 
+        darkMaterial.setAmbientColor(new Color3f(0.1f,0.1f,0.1f));
+        darkMaterial.setSpecularColor(new Color3f(0.2f,0.2f,0.2f)); 
+        darkMaterial.setDiffuseColor(new Color3f(0.3f,0.3f,0.3f));
+        
         //BASE
          // creating an appearance for base (box)
 	Appearance baseApp = new Appearance();
@@ -25,6 +42,7 @@ public class Train {
 	ColoringAttributes baseCA = new ColoringAttributes();
 	baseCA.setColor(baseColor);
 	baseApp.setColoringAttributes(baseCA);
+        baseApp.setMaterial(blueMaterial);
         
          //creation of base
         Box base = new Box(0.1f,0.03f, 0.25f,baseApp);
@@ -48,6 +66,7 @@ public class Train {
 	ColoringAttributes bodyCA = new ColoringAttributes();
 	bodyCA.setColor(bodyColor);
 	bodyApp.setColoringAttributes(bodyCA);
+        bodyApp.setMaterial(redMaterial);
         
         //creation of body
         Cylinder body = new Cylinder(0.1f,0.25f,bodyApp);
@@ -68,6 +87,7 @@ public class Train {
         ColoringAttributes cabCA = new ColoringAttributes();
 	cabCA.setColor(cabColor);
 	cabApp.setColoringAttributes(cabCA);
+        cabApp.setMaterial(redMaterial);
         
         //creation of cab
         Box cab = new Box(0.1f,0.1f,0.1f, cabApp);
@@ -89,13 +109,14 @@ public class Train {
         
         //creating an appearance for funnel (cone)
         Appearance funnelApp = new Appearance();
-        Color3f funnelColor = new Color3f(0.1f, 0.1f, 0.1f); //dark grey
+        Color3f funnelColor = new Color3f(0.0f, 0.0f, 0.0f); 
         ColoringAttributes funnelCA = new ColoringAttributes();
 	funnelCA.setColor(funnelColor);
 	funnelApp.setColoringAttributes(funnelCA);
+        funnelApp.setMaterial(darkMaterial);
         
         //creation of funnel
-        Cone funnel = new Cone(0.03f,0.15f);
+        Cone funnel = new Cone(0.03f,0.15f, funnelApp);
         
         bg.addChild(funnelTG1);
         funnelTG1.addChild(funnelTG2);
@@ -113,6 +134,7 @@ public class Train {
         ColoringAttributes roofCA = new ColoringAttributes();
 	roofCA.setColor(roofColor);
 	roofApp.setColoringAttributes(roofCA);
+        roofApp.setMaterial(blueMaterial);
         
         //creation of roof
         Box roof = new Box(0.12f,0.05f,0.12f,roofApp);
@@ -149,6 +171,7 @@ public class Train {
         ColoringAttributes wheelsCA = new ColoringAttributes();
 	wheelsCA.setColor(wheelsColor);
 	wheelsApp.setColoringAttributes(wheelsCA);
+        wheelsApp.setMaterial(darkMaterial);
         
         //creation of wheels
         Cylinder wheel1 = new Cylinder(0.07f,0.03f,wheelsApp);

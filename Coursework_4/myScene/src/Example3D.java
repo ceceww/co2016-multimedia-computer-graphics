@@ -6,6 +6,7 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import javax.media.j3d.Alpha;
+import javax.media.j3d.AmbientLight;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
@@ -78,17 +79,27 @@ public class Example3D extends JFrame {
         BranchGroup bgBridge = Bridge.bridge();
         
         //TERRAIN
+        
+        //transformation to position the terrain
+        Transform3D terrain3d = new Transform3D();
+        terrain3d.setTranslation(new Vector3d(0.0, -0.14 ,0.0));
+        TransformGroup terrainTG = new TransformGroup(terrain3d);
+        
         BranchGroup bgTerrain = Terrain.terrain();
         
-        //LIGHTING
-        Color3f lightColor = new Color3f(1.0f, 1.0f, 1.0f);
-        Vector3f lightDirection = new Vector3f(4.0f, -7.0f, -12.0f);
-        DirectionalLight light = new DirectionalLight(lightColor, lightDirection);
-        light.setInfluencingBounds(bounds);
+        Color3f lightColor = new Color3f (1.0f, 1.0f, 1.0f);
+ 	Vector3f light1Direction = new Vector3f (0.0f, 0.0f, -1f);
+        DirectionalLight light1  = new DirectionalLight (lightColor, light1Direction);
+    	light1.setInfluencingBounds (bounds);
+
+    	AmbientLight ambientLightNode = new AmbientLight (lightColor);
+    	ambientLightNode.setInfluencingBounds (bounds);
+
         
         //relations between nodes
         objRoot.addChild(mainTG);
-        objRoot.addChild(light); //lighting
+        objRoot.addChild(light1); //lighting
+        objRoot.addChild (ambientLightNode);
         mainTG.addChild(trainTG0);
         
        //make train move
@@ -105,7 +116,8 @@ public class Example3D extends JFrame {
         bridgeTG.addChild(bgBridge);
        
         //terrain
-        mainTG.addChild(bgTerrain);
+        mainTG.addChild(terrainTG);
+        terrainTG.addChild(bgTerrain);
         
         // Create the rotate behavior node
 	MouseRotate behavior = new MouseRotate();
@@ -146,8 +158,8 @@ public class Example3D extends JFrame {
 	// starting postion of the viewing platform
         Vector3f translate = new Vector3f(); 
       	Transform3D T3D = new Transform3D();
-	// move along z axis by 5.0f ("move away from the screen") 
-	translate.set( 0.0f, 0.0f, 5.0f);
+	// move along z axis by 7.0f ("move away from the screen") 
+	translate.set( 0.0f, 0.0f, 7.0f);
         T3D.setTranslation(translate);
 	cameraTG.setTransform(T3D);
         setTitle("Train");
