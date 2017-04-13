@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+Time-stamp: <2017-02-03 17:38:33 rlc3> 
+Illustating basic SVG animation
+EXERCISE: try changing M L L to m l l and various permutations
+          try altering the values for 0 0 and 100 0 and 0 0 
+-->
+
+<svg 
+   width="100%" 
+   height="100%" 
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<rect 
+      x="0"
+      y="0" 
+      height="40" 
+      width="60" 
+      style="fill:blue" > 
+
+<animate attributeType="XML" attributeName="height"
+from="40" to="0" dur="5s" repeatCount="indefinite" />
+
+</rect>
+
+   <rect 
+      x="100"
+      y="50" 
+      height="40" 
+      width="60" 
+      style="fill:blue" > 
+
+    <animateMotion path="M 0 200 L 100 0 L 0 0" 
+                             dur="10s" fill="freeze" />
+   </rect>
+
+
+</svg>
+
+
+
+
+

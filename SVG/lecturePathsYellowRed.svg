@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+
+<svg 
+   width="1200" 
+   height="1000" 
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink">
+
+   <path d="M300,200 h-150 a150,150 0 1,0 150,-150 z"
+        style="fill:red; stroke:blue; stroke-width:5"/>
+  <path d="M275,175 v-150 a150,150 0 0,0 -150,150 z"
+        style="fill:yellow; stroke:blue; stroke-width:5"/>
+  <path d="M600,350 l 50,-25 
+           a25,25 -30 0,1 50,-25 l 50,-25 
+           a25,50 -30 0,1 50,-25 l 50,-25 
+           a25,75 -30 0,1 50,-25 l 50,-25 
+           a25,150 -30 0,1 50, -25, l 50,-25"
+        style="fill:none; stroke:red; stroke-width:5" />
+
+</svg>
+
+</body>
+</html>
+
+
+
