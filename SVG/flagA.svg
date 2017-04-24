@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<body>
+<svg 
+   width="450" 
+   height="300" 
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink">
+   
+<defs>
+      <g id="ray">	 
+         <polygon  
+            points="0,0 13,200 27,200 40,0"
+	    style="fill:yellow"/>
+       </g>	    
+    </defs>	
+   
+<rect 
+      x="0" 
+      y="0"  
+      height="150" 
+      width="450" 
+      style="fill:rgb(66,179,244)">
+	  <animate attributeName="x" attributeType="XML"	
+      from="450" to="0" begin="0s" dur="10s" fill="freeze"/>
+</rect>
+
+<!--draw semi-circle -->
+<path d="M310,250 a1,1 0 0,0 -185,0" fill="yellow">
+    <animateMotion path="M -450 0 L 0 0 L 0 -100" dur="12s" fill="freeze"/>
+  </path>
+  
+ <set xlink:href="#ray" attributeName="visibility" attributeType="XML" begin="12s" end="13s" from="hidden" to="visible" fill="freeze"/>  
+ 
+ <use xlink:href="#ray"  visibility="hidden" x="0" y="100" transform="translate(-50,-5) rotate(-83,20,120)">
+   <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use> 
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(-40,-75) rotate(-67,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(-5,-135) rotate(-52,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(45,-180) rotate(-37,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(105,-210) rotate(-22,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(170,-230) rotate(-7,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(237,-220) rotate(8,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(300,-210) rotate(22,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(360,-180) rotate(37,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(410,-135) rotate(52,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(437,-75) rotate(67,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<use xlink:href="#ray" visibility="hidden" x="0" y="100" transform="translate(450,-5) rotate(83,20,120)">
+  <animateTransform attributeName="transform" type="scale" additive="sum" from="0 1" to="1 1" begin="12s" dur="1s"/>
+</use>
+
+<rect 
+      x="0" 
+      y="150"  
+      height="150" 
+      width="450" 
+      style="fill:black">
+	  <animate attributeName="x" attributeType="XML"	
+      from="-450" to="0" begin="0s" dur="10s" fill="freeze"/>
+</rect>
+
+<!--ellipses-->
+<set xlink:href="#ellipse1" attributeName="visibility" attributeType="XML" begin="12s" end="13s" from="hidden" to="visible" fill="freeze"/> 
+<ellipse id="ellipse1" visibility="hidden" cx="215" cy="167" rx="90" ry="5" style="fill:yellow;stroke:none" />
+<set xlink:href="#ellipse2" attributeName="visibility" attributeType="XML" begin="13s" end="14s" from="hidden" to="visible" fill="freeze"/> 
+<ellipse id="ellipse2" visibility="hidden" cx="215" cy="185" rx="80" ry="5" style="fill:yellow;stroke:none" />
+<set xlink:href="#ellipse3" attributeName="visibility" attributeType="XML" begin="14s" end="15s" from="hidden" to="visible" fill="freeze"/> 
+<ellipse id="ellipse3" visibility="hidden" cx="215" cy="200" rx="70" ry="4" style="fill:yellow;stroke:none" />
+<set xlink:href="#ellipse4" attributeName="visibility" attributeType="XML" begin="15s" end="16s" from="hidden" to="visible" fill="freeze"/> 
+<ellipse id="ellipse4" visibility="hidden" cx="215" cy="215" rx="55" ry="4" style="fill:yellow;stroke:none" />
+<set xlink:href="#ellipse5" attributeName="visibility" attributeType="XML" begin="16s" end="17s" from="hidden" to="visible" fill="freeze"/> 
+<ellipse id="ellipse5" visibility="hidden" cx="215" cy="230" rx="40" ry="3" style="fill:yellow;stroke:none" />
+
+
+	  
+</svg>
+</body>
+</html>
